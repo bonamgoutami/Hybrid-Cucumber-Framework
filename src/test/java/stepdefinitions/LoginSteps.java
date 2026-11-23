@@ -42,7 +42,7 @@ public class LoginSteps {
         driver.getCurrentUrl();
         Assert.assertTrue(driver.getCurrentUrl().contains("inventory.html"));
         Thread.sleep(1000);
-        driver.quit();
+
     }
 
     @Then("error message should be displayed")
@@ -52,7 +52,7 @@ public class LoginSteps {
         Assert.assertTrue(loginPage.isErrorDisplayed());
         System.out.println(loginPage.getErrorMessage());
         Thread.sleep(500);
-        driver.quit();
+
     }
 
     @And("user clicks on Twitter link in footer")
@@ -84,6 +84,7 @@ public class LoginSteps {
         driver.switchTo().window(parentWindow);
         System.out.println("Back to window: " + driver.getTitle());
         Assert.assertTrue(driver.getTitle().contains("Swag Labs"));
+        driver.quit();
     }
 
     @After
