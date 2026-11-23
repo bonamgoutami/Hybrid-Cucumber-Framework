@@ -1,5 +1,6 @@
 package stepdefinitions;
 import io.cucumber.java.en.Given;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import pages.LoginPage;
@@ -8,9 +9,12 @@ import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.And;
 
+import java.util.Set;
+
 public class LoginSteps {
    WebDriver driver;
    LoginPage loginPage;
+   String parentWindow;
         @Given("user opens browser and navigates to {string}")
             public void user_opens_browser_and_navigates_to(String url) throws InterruptedException {
                 driver= new ChromeDriver();
@@ -46,7 +50,35 @@ public class LoginSteps {
             Thread.sleep(500);
             driver.quit();
     }
-
-
+    @And("user clicks on Twitter link in footer")
+    public void user_clicks_on_Twitter_link_in_footer() {
+        parentWindow = driver.getWindowHandle();
+        System.out.println("Parent Window Handle is " + parentWindow);
+        loginPage.clickTwitterPage();
     }
+        @Then("user should switch to Twitter window  and verify title")
+                public void user_should_switch_to_Twitter_window_and_verify_title(){
+        Set<String> allWindows = driver.getWindowHandles();
+        System.out.println("All window handles" + allWindows.size());
+        for (String window : allWindows) {
+            if (!window.equals(parentWindow)) {
+                driver.switchTo().window(window);
+                System.out.println("current title: " + driver.getTitle());
+                System.out.println("child url:" + driver.getCurrentUrl());
+            }
+
+        }
+    }
+
+
+    @And("user should close child window and come back to parent window")
+    public void user_should_close_child_window_and_come_back_to_parent_window(){
+    driver.close();
+    driver.switchTo().window(parentWindow);
+    System.out.println("Back to window: " + driver.getTitle());
+    }
+    }
+
+
+
 
