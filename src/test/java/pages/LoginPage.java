@@ -10,6 +10,7 @@ public class LoginPage {
      By passwordField= By.id("password");
      By loginButton= By.name("login-button");
      By errorMessage= By.xpath("//h3[@data-test='error']");
+     By twitterPage= By.className("social_twitter");
      public LoginPage(WebDriver driver){
          this.driver=driver;
      }
@@ -30,5 +31,8 @@ public class LoginPage {
      }
      public String getErrorMessage(){
         return driver.findElement(errorMessage).getText();
+     }
+     public void clickTwitterPage(){
+         driver.findElement(twitterPage).click();
      }
 }
