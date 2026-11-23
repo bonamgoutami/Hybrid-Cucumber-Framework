@@ -10,7 +10,7 @@ public class LoginPage {
      By passwordField= By.id("password");
      By loginButton= By.name("login-button");
      By errorMessage= By.xpath("//h3[@data-test='error']");
-     By twitterPage= By.className("social_twitter");
+     By twitterPage= By.xpath("//a[@text='Twitter']");
      public LoginPage(WebDriver driver){
          this.driver=driver;
      }
