@@ -71,7 +71,7 @@ public class LoginSteps {
                 driver.switchTo().window(window);
                 System.out.println("current title: " + driver.getTitle());
                 System.out.println("child url:" + driver.getCurrentUrl());
-                Assert.assertTrue(driver.getTitle().contains(window));
+                Assert.assertTrue(driver.getTitle().contains("Twitter")||driver.getTitle().contains("X"));
             }
 
         }
@@ -83,7 +83,7 @@ public class LoginSteps {
         driver.close();
         driver.switchTo().window(parentWindow);
         System.out.println("Back to window: " + driver.getTitle());
-        Assert.assertTrue(driver.getCurrentUrl().contains("Swag Labs"));
+        Assert.assertTrue(driver.getTitle().contains("Swag Labs"));
     }
 
     @After
@@ -94,7 +94,7 @@ public class LoginSteps {
     }
 
 
-    
+
 
 
 
