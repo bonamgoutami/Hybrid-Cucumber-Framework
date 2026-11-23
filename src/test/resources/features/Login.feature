@@ -1,25 +1,26 @@
 Feature: Login functionality
-  Scenario: valid login with correct credentials
+  Scenario Outline: valid login with different credentials
     Given user opens browser and navigates to "https://www.saucedemo.com/"
-    When user enter username "standard_user" and password "secret_sauce"
+    When user enter username "<username>" and password "<password>"
     And  user clicks on login button
     Then user should be navigated to products page
+Examples:
+    |username                |password    |
+    |standard_user           |secret_sauce|
+    |problem_user            |secret_sauce|
+    |performance_glitch_user |secret_sauce|
 
 
-  Scenario: invalid login with correct credentials
+  Scenario Outline: invalid login with different credentials
     Given user opens browser and navigates to "https://www.saucedemo.com/"
-    When user enter username "locked_out_user" and password "secret_sauce"
+    When user enter username "<username>" and password "<password>"
     And  user clicks on login button
     Then error message should be displayed
+    Examples:
+    |username | password|
+    |locked_out_user | secret_sauce|
+    |standard_user   |secret       |
+    |                |             |
+    |standard_user   |             |
 
-  Scenario: invalid login with Wrong Password
-    Given user opens browser and navigates to "https://www.saucedemo.com/"
-    When user enter username "standard_user" and password "secret"
-    And  user clicks on login button
-    Then error message should be displayed
 
-  Scenario: invalid login with empty credentials
-    Given user opens browser and navigates to "https://www.saucedemo.com/"
-    When user enter username " " and password "  "
-    And  user clicks on login button
-    Then error message should be displayed
